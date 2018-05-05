@@ -13,3 +13,9 @@ https://mongodb.github.io/mongo-java-driver/
 Launch:
 
 java -cp .:mongo-java-driver-3.6.3.jar MongoConnect
+
+
+
+Setting up a Host Only Network with VirtualBox:
+
+https://askubuntu.com/questions/293816/in-virtualbox-how-do-i-set-up-host-only-virtual-machines-that-can-access-the-in#293817
