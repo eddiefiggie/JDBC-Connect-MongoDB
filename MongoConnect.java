@@ -15,11 +15,11 @@ public class MongoConnect {
     public static void main( String args[] ) {  
         try {  
             // Creating a Mongo client 
-            MongoClient mongo = new MongoClient( "localhost" , 27017 ); 
+            MongoClient mongo = new MongoClient( "eddiefiggie-VirtualBox" , 27017 ); 
    
             // Creating Credentials 
             MongoCredential credential; 
-            credential = MongoCredential.createCredential("ExampleUser", "Database_01", 
+            credential = MongoCredential.createCredential("ExampleUser", "myDb", 
                  "PlaceHolder".toCharArray()); 
             System.out.println();
             System.out.println("Connected to the database successfully."); 
@@ -27,8 +27,10 @@ public class MongoConnect {
       
             // Accessing the database 
             MongoDatabase database = mongo.getDatabase("myDb"); 
-            System.out.println("Credentials:  " + credential);
-            System.out.println();
+            
+            //Creating a collection 
+            database.createCollection("sampleCollection"); 
+            System.out.println("Collection created successfully");
         } 
         catch (MongoException e) {
             System.err.println(e);
