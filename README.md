@@ -12,7 +12,7 @@ https://mongodb.github.io/mongo-java-driver/
 
 Launch:
 
-java -cp .:mongo-java-driver-3.6.3.jar MongoConnect
+java -cp .:mongo-java-driver-3.7.0.jar MongoConnect
 
 
 
