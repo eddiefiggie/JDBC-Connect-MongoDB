@@ -1,6 +1,6 @@
 /*****************************************************************
  * Name: Edwin Figueroa
- * Date: 5/1/18
+ * Date: 5/11/18
  *
  * Description: Test DB Connection with MongoDB
  *****************************************************************/
@@ -18,7 +18,8 @@ public class MongoConnect {
 
         MongoInit dbConn = new MongoInit();
         dbConn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        dbConn.setSize(450,108); // Frame setSize
+        dbConn.setSize(450,108);
+        dbConn.setLocationRelativeTo(null);
         dbConn.setVisible(true);
     }
 }

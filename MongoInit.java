@@ -1,6 +1,6 @@
 /*****************************************************************
  * Name: Edwin Figueroa
- * Date: 5/10/18
+ * Date: 5/11/18
  *
  * Description: Database Connector for MongoDB
  *****************************************************************/
@@ -23,15 +23,12 @@ import com.mongodb.MongoException;
 
 public class MongoInit extends JFrame {
 
-    private JTextField location; // Database IP or Machine Name
-    private JTextField port; // Database port number.
-    private JTextField databaseName; // Database name
+    private JTextField location;
+    private JTextField port;
+    private JTextField databaseName;
     private JTextField userName;
-    // private JPasswordField password;
-
     private JButton cancel;
     private JButton apply;
-
     private String locationString;
     private String portConvert;
     private int portInt;
@@ -45,13 +42,11 @@ public class MongoInit extends JFrame {
         GridLayout grid = new GridLayout(6,2);
         setLayout(grid); // set frame layout
 
-
         // Construct location field
         JLabel locationLabel = new JLabel("Database IP or Machine Name: ");
         location = new JTextField("localhost", 20); // Setting column width
         add(locationLabel);
         add(location);  // add location to JFrame
-
 
         // Construct port with default of 27017 (MongoDB Default)
         JLabel portLabel = new JLabel("Custom Port: ");
@@ -71,12 +66,6 @@ public class MongoInit extends JFrame {
         add(userNameLabel);
         add(userName);  // add to JFrame
 
-        /* Construct password to JFrame
-        JLabel passwordLabel = new JLabel("Database Password: ");
-        password = new JPasswordField(20); // Setting column width
-        add(passwordLabel);
-        add(password);  // add to JFrame */
-
         // Cancel button
         cancel = new JButton("Cancel");
         add(cancel);
@@ -89,9 +78,6 @@ public class MongoInit extends JFrame {
         TextFieldHandler handler = new TextFieldHandler();
         cancel.addActionListener(handler);
         apply.addActionListener(handler);
-
-
-
     }
 
     public String getLo() {
@@ -110,11 +96,6 @@ public class MongoInit extends JFrame {
         return userNameString;
     }
 
-/*
-    public String getPassword() {
-        return passwordString;
-    }
-*/
     private class TextFieldHandler implements ActionListener {
 
 
@@ -150,26 +131,18 @@ public class MongoInit extends JFrame {
 
                     JOptionPane.showMessageDialog(null, string);
 
-
                     // Accessing the database
                     MongoDatabase database = mongo.getDatabase(databaseNameString);
 
                     //Creating a collection
                     database.createCollection("CozeCollection");
 
-
-                    //check if DB exists
-                    // List<String> databaseNames = mongo.getDatabaseNames();
                 }
                 catch (MongoException e) {
                     System.err.println(e);
                     System.exit(1);
                 }
-
-
-                // passwordString = password.getText();
-
-                // System.exit(0);
+                System.exit(0);
         }
     }
 }
