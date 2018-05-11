@@ -10,9 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.GridLayout; // Aligns components
 import javax.swing.JFrame; // Provides basic window features
 import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-// import javax.swing.JPasswordField;
 import javax.swing.JOptionPane;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.MongoClient;
@@ -26,20 +26,22 @@ public class MongoInit extends JFrame {
     private JTextField location;
     private JTextField port;
     private JTextField databaseName;
+    private JTextField collection;
     private JTextField userName;
+    private JPasswordField password;
     private JButton cancel;
     private JButton apply;
     private String locationString;
     private String portConvert;
     private int portInt;
     private String databaseNameString;
+    private String collectionString;
     private String userNameString;
-    private String passwordString;
 
     // DatabaseInit constructor adds JTextFields to JFrame
     public MongoInit() {
         super("Database Initiaization");
-        GridLayout grid = new GridLayout(6,2);
+        GridLayout grid = new GridLayout(7,2);
         setLayout(grid); // set frame layout
 
         // Construct location field
@@ -56,15 +58,27 @@ public class MongoInit extends JFrame {
 
         // Construct databaseName to JFrame
         JLabel databaseNameLabel = new JLabel("Database Name: ");
-        databaseName = new JTextField(20); // Setting column width
+        databaseName = new JTextField("GenericDB", 20); // Setting column width
         add(databaseNameLabel);
         add(databaseName);  // add to JFrame
+
+        // Construct collection field
+        JLabel collectionLabel = new JLabel("Collection Name: ");
+        collection = new JTextField("GenericList", 20); // Setting column width
+        add(collectionLabel);
+        add(collection);  // add collection to JFrame
 
         // Construct userName to JFrame
         JLabel userNameLabel = new JLabel("User Name: ");
         userName = new JTextField(20); // Setting column width
         add(userNameLabel);
         add(userName);  // add to JFrame
+
+        // Construct password to JFrame
+        JLabel passwordLabel = new JLabel("Password: ");
+        password = new JPasswordField("password", 20); // Setting column width
+        add(passwordLabel);
+        add(password);  // add to JFrame
 
         // Cancel button
         cancel = new JButton("Cancel");
@@ -115,6 +129,7 @@ public class MongoInit extends JFrame {
                 portInt = Integer.parseInt(portConvert);
                 databaseNameString = databaseName.getText();
                 userNameString = userName.getText();
+                collectionString = collection.getText();
 
                 string = "Connection to " + location.getText() + " succesfull.";
 
@@ -127,7 +142,7 @@ public class MongoInit extends JFrame {
                     MongoCredential credential;
 
                     credential = MongoCredential.createCredential(userNameString,
-                        databaseNameString, "password".toCharArray());
+                        databaseNameString, password.getPassword()/*.toCharArray()*/);
 
                     JOptionPane.showMessageDialog(null, string);
 
@@ -135,7 +150,7 @@ public class MongoInit extends JFrame {
                     MongoDatabase database = mongo.getDatabase(databaseNameString);
 
                     //Creating a collection
-                    database.createCollection("CozeCollection");
+                    database.createCollection(collectionString);
 
                 }
                 catch (MongoException e) {

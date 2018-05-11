@@ -13,7 +13,7 @@ public class MongoConnect {
 
         MongoInit dbConn = new MongoInit();
         dbConn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        dbConn.setSize(450,108);
+        dbConn.setSize(450,150);
         dbConn.setLocationRelativeTo(null);
         dbConn.setVisible(true);
     }
